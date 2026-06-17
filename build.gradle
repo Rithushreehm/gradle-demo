@@ -1,14 +1,24 @@
-plugins {
-    id 'java'
-}
+pipeline {
+    agent any
 
-group = 'com.example'
-version = '1.0'
+    stages {
 
-repositories {
-    mavenCentral()
-}
+        stage('Build') {
+            steps {
+                bat 'gradle build'
+            }
+        }
 
-dependencies {
-    testImplementation 'junit:junit:4.13.2'
+        stage('Test') {
+            steps {
+                bat 'gradle test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Application Deployed Successfully'
+            }
+        }
+    }
 }
